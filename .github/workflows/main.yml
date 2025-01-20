@@ -122,6 +122,7 @@ jobs:
         FILE_PATH=$(find -name "*.img.*")
         echo "FILE_PATH=$FILE_PATH" >> $GITHUB_ENV
         echo -e "FILE_PATH path: $FILE_PATH"
+        ls -al openwrt
 
     - name: Create Release
       uses: softprops/action-gh-release@v2

@@ -46,15 +46,19 @@ jobs:
           else
             link_gdrive=$(echo ${{ github.event.inputs.fw_link }} | awk -F "/" '{print $4}' | awk -F "?id=" '{print $2}'|awk -F "&export" '{print $1}')
           fi
+          echo Gdrive downloading...
           sudo gdown ${link_gdrive} -O openwrt/$(echo "${{ github.event.inputs.fw_link }}" | awk -F/ '{print $NF}') >/dev/null
         else
           if [ $(echo ${{ github.event.inputs.fw_link }} | grep "mediafire.com") ]; then
+            echo Mediafire downloading...
             sudo mediafire-dl ${{ github.event.inputs.fw_link }} -o openwrt/$(echo "${{ github.event.inputs.fw_link }}" | awk -F/ '{print $NF}') >/dev/null
           else
             if [ $(echo ${{ github.event.inputs.fw_link }} | grep "mega.nz") ]; then
+              echo Mega downloading...
               file_mega=$(sudo mega-get ${{ github.event.inputs.fw_link }} | awk -F: '{print $2}')
               sudo mv ${file_mega} openwrt/$(echo "${{ github.event.inputs.fw_link }}" | awk -F/ '{print $NF}')
             else
+              echo Wget downloading...
               sudo wget --no-check-certificate ${{ github.event.inputs.fw_link }} -O openwrt/$(echo "${{ github.event.inputs.fw_link }}" | awk -F/ '{print $NF}') >/dev/null
             fi
           fi

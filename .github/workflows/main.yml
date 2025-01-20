@@ -56,6 +56,7 @@ jobs:
             if [ $(echo ${{ github.event.inputs.fw_link }} | grep "mega.nz") ]; then
               echo Mega downloading...
               file_mega=$(sudo mega-get ${{ github.event.inputs.fw_link }} | awk -F: '{print $2}')
+              echo Mega file: $file_mega
               sudo mv ${file_mega} openwrt/$(echo "${{ github.event.inputs.fw_link }}" | awk -F/ '{print $NF}')
             else
               echo Wget downloading...

@@ -57,7 +57,7 @@ jobs:
               echo Mega downloading...
               file_mega=$(sudo mega-get ${{ github.event.inputs.fw_link }} | awk -F: '{print $2}')
               echo Mega file: $file_mega
-              sudo mv ${file_mega} openwrt/$(echo "${{ github.event.inputs.fw_link }}" | awk -F/ '{print $NF}')
+              sudo mv ${file_mega} openwrt/
             else
               echo Wget downloading...
               sudo wget --no-check-certificate ${{ github.event.inputs.fw_link }} -O openwrt/$(echo "${{ github.event.inputs.fw_link }}" | awk -F/ '{print $NF}') >/dev/null

@@ -67,6 +67,7 @@ jobs:
     - name: Get extension
       id: get_extension
       run: |
+        ls ./openwrt
         filename=$(find ./openwrt -name "*.img.*")
         echo filename: $filename
         extension=$(basename "$filename" | sed -E 's/.*\.(img\.(gz|xz))$/\1/')

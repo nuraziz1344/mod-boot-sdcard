@@ -64,8 +64,11 @@ jobs:
       id: get_extension
       run: |
         filename=$(find ./openwrt -name "*.img.*")
+        echo filename: $filename
         extension=$(basename "$filename" | sed -E 's/.*\.(img\.(gz|xz))$/\1/')
+        echo extension: $extension
         no_extension=$(basename "$filename" | sed -E 's/\.(gz|xz)$//')
+        echo filename: $no_extension
         echo "file_type=$extension" >> $GITHUB_ENV
         echo "file_name=$no_extension" >> $GITHUB_ENV
         

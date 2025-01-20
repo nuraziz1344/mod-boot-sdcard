@@ -121,7 +121,7 @@ jobs:
         FILE_PATH=$(find -name "*.img.*")
         echo "FILE_PATH=$FILE_PATH" >> $GITHUB_ENV
         echo -e "FILE_PATH path: $FILE_PATH"
-        chmod -R 777 openwrt
+        sudo chmod -R 777 openwrt
         ls -al openwrt
 
     - name: Create Release

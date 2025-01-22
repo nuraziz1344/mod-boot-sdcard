@@ -119,7 +119,7 @@ jobs:
     - name: Find Firmware
       run: |
         sudo chmod -R 777 openwrt
-        for file in openwrt; do
+        cd openwrt && for file in *; do
           mv "$file" "MODSDCARD-$file"
         done
         ls -al openwrt

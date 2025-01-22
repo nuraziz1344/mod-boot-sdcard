@@ -72,7 +72,7 @@ jobs:
         echo filename: $filename
         extension=$(basename "$filename" | sed -E 's/.*\.(img\.(gz|xz))$/\1/')
         echo extension: $extension
-        no_extension="$(basename "$filename" | sed -E 's/\.(gz|xz)$//')-MODSDCARD"
+        no_extension="$(basename "$filename" | sed -E 's/\.(gz|xz)$//')"
         echo filename: $no_extension
         echo "file_type=$extension" >> $GITHUB_ENV
         echo "file_name=$no_extension" >> $GITHUB_ENV
@@ -118,11 +118,14 @@ jobs:
 
     - name: Find Firmware
       run: |
+        for file in openwrt; do
+          mv "$file" "MODSDCARD-$file"
+        done
+        ls -al openwrt
         FILE_PATH=$(find -name "*.img.*")
         echo "FILE_PATH=$FILE_PATH" >> $GITHUB_ENV
         echo -e "FILE_PATH path: $FILE_PATH"
         sudo chmod -R 777 openwrt
-        ls -al openwrt
 
     - name: Create Release
       uses: softprops/action-gh-release@v2
